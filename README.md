@@ -41,64 +41,55 @@ Supplemental information for FFI Journal
 * 2D-MCS--ver-Cmdstanr-.html:2D-MCS  (ver Cmdstanr).Rmdファイルの解析をKnit機能を用いてアウトプットしたものです。Cmdstnarに対応したコードになっています。
 * 2D-MCS (ver Cmdstanr).Rmd: Rマークダウンファイル。Cmdstanrに対応したコードが書いてある。
 
-
 ## ≪インストール方法≫
-このフォルダをダウンロードして、任意の場所に保存して下さい。<br>
+緑色のCodeボタンをクリック⇒"Download ZIP"を選択し本プロジェクトのファイルが保存されているzipファイルをダウンロードして下さい。zipファイルを解凍して任意の場所に保存して下さい。<br>
 日本語が使用されているディレクトリへの保存は避けた方が無難です。<br>
-<br>
+
 ## ≪実行環境の整備について≫
-<br>ソフトウェアとしてはRとRStudioを想定しています。
-<br>Rのインストール後、自身の環境にあったRStudioをインストールして下さい。
-<br>RとRStudioのダウンロード先は以下のとおりです。
+ソフトウェアとしてはRとRStudioを想定しています。<br>
+Rのインストール後、自身の環境にあったRStudioをインストールして下さい。<br>
+RとRStudioのダウンロード先は以下のとおりです。<br>
 <br>
-<br>R: <https://www.r-project.org/>
-<br>RStudio: <https://www.rstudio.com/products/rstudio/download/>
+R: <https://www.r-project.org/><br>
+RStudio: <https://www.rstudio.com/products/rstudio/download/><br>
 <br>
-<br>このRプロジェクトでは、{rstan}パッケージ\[^※注2]を使用しています。
-<br>下記のサイトに従って{rstan}パッケージのインストールして下さい。
+このRプロジェクトでは、{rstan}パッケージ(※注2)を使用しています。<br>
+下記のサイトに従って{rstan}パッケージのインストールして下さい。<br>
 <br>
-<br>https://mc-stan.org/users/interfaces/rstan
-<br>https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started-(Japanese)
+<https://mc-stan.org/users/interfaces/rstan><br>
+<https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started-(Japanese)><br>
 <br>
-<br>
-<br>{cmdstanr}のインストールおよび実行方法は下記のサイトを参考にして下さい。
-<br>
-<br>https://mc-stan.org/cmdstanr/
-<br>
-<br>
+{cmdstanr}のインストールおよび実行方法は下記のサイトを参考にして下さい。<br>
+<https://mc-stan.org/cmdstanr/>
+
 ## ≪使用方法≫
-<br>RStudioを起動して、フォルダ内の"2D-MCS.Rproj"を開いて下さい。
+RStudioを起動して、フォルダ内の"2D-MCS.Rproj"を開いて下さい。<br>
+右下ペインのFileタブより、"2D-MCS.Rmd"をクリックしRmdファイルを開いて下さい。<br>
+左上ペインの"2D-MCS.Rmd"タブを選択し、チャンク (コードが書いてある灰色の領域) の右上にある緑三角をクリックすると、チャンク内のコードが順番に実行されます。<br>
+順番にチャンク内のコードを実行してください。<br>
+"#"記号以降の文字は実行されない、メモ欄になります。<br>
 <br>
-<br>右下ペインのFileタブより、"2D-MCS.Rmd"をクリックしRmdファイルを開いて下さい。
-<br>左上ペインの"2D-MCS.Rmd"タブを選択し、チャンク (コードが書いてある灰色の領域) の右上にあ
-<br>る緑三角をクリックすると、チャンク内のコードが順番に実行されます。
-<br>順番にチャンク内のコードを実行してください。
-<br>"#"記号以降の文字は実行されない、メモ欄になります。
-<br>
-<br>左下ペインのFileタブより、"Conc_Lognorm.stan"をクリックしてStanファイルを開くと、Stan
-コードが記載されています。
-<br>"//"以降の文字は実行されないメモ欄です。RStudioのKnit機能を使って出力を検討している場合
-は、日本語の使用を避けて下さい。
-<br>
-<br>
+左下ペインのFileタブより、"Conc_Lognorm.stan"をクリックしてStanファイルを開くと、Stanコードが記載されています。<br>
+"//"以降の文字は実行されないメモ欄です。RStudioのKnit機能を使って出力を検討している場合は、日本語の使用を避けて下さい。<br>
+
 ## ≪アンインストール方法≫
-<br>フォルダごと削除ください。
-<br>RおよびRStudioのアンインストールは、公式のHPを参照してください
-<br>
-<br>
+フォルダごと削除ください。<br>
+RおよびRStudioのアンインストールは、公式のHPを参照してください<br>
+
 ## ≪履歴≫
-<br>2022/9/2: 作製
-<br>2022/9/28: Cmdstanrに対応したRmdファイルと解析結果を追加
-<br>2022/10/13: GitHubにアップロード 
-<br>
+* 2022/9/2: 作製
+* 2022/9/28: Cmdstanrに対応したRmdファイルと解析結果を追加
+* 2022/10/13: GitHubにアップロード 
+
 ## ≪作者≫
-<br>鈴木美成<br>
----
-※注1: ≪RstudioがPositへと変更≫<br>
+鈴木美成<br>
+<br>
+***
+### ※注1: ≪RstudioがPositへと変更≫
 このReadmeを作製した時点で、RStudioはPositに変更されることがアナウンスされています。<br>
 本Readmeが修正されていない場合は、RStudioをPositと読み替えて下さい。<br>
 
-※注2 ≪{rstan}パッケージの開発状況について≫<br>
+### ※注2 ≪{rstan}パッケージの開発状況について≫
 {rstan}は2020年7月以降更新されておらず (2022/8/2 現在)、最新のStanの機能が使えません。<br>
 また、個人的な印象ですが、{rstan}パッケージは不安定で計算の途中で止まってしまうこともよくあります。そこで、{rstan}の使用方法が分かったら、早いうちに{cmdstanr}パッケージに乗り
 換えることを薦めます。なお、{rstan}で使用したstanコードは{cmdstanr}でも使用することが可能です。

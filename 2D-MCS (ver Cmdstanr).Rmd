@@ -1,0 +1,205 @@
+---
+title: "2D-MCS lognormal"
+author: "Yoshinari Suzuki"
+date: "2022/8/2"
+output:
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(formattable)
+library(scales)
+library(loo)
+library(bayesplot)
+
+library(cmdstanr)
+library(rstan)
+library(bayesplot)
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores()) # 並列処理の実行
+cpp_options = list(stan_threads = TRUE) # 並列化のためのコンパイルをやる必要がある
+
+theme_set(
+  theme_bw() +
+  theme(
+    panel.grid.minor = element_line(linetype = "blank"), 
+    axis.text = element_text(colour = "black"),
+    legend.position="bottom",
+    text=element_text(size=12)
+  )
+)
+```
+
+乱数を生成する
+```{r}
+# 分布のパラメーターを推定
+N <- 100
+GM <- 1
+GSD <- 2
+
+# LOQとLODを設定
+LOQ <- 1
+LOD <- LOQ * 3/10
+
+# 乱数を生成
+set.seed(1)
+
+df <- data.frame(
+  Y = rlnorm(N, meanlog = log(GM), sdlog=log(GSD)),
+  Cens = NA, # 打ち切りに関する情報
+  Y_LB = NA, # 下限値
+  Y_MB = NA, # 下限値と上限値の平均
+  Y_UB = NA # 上限値
+)
+
+df$Y_LB <- df$Y
+df$Y_UB <- df$Y
+df$Cens <- paste("\u2265","LOQ", sep = "")
+
+df$Y_LB[df$Y<LOD] <- 0
+df$Y_UB[df$Y<LOD] <- LOD
+df$Cens[df$Y<LOD] <- "<LOD"
+
+df$Y_LB[df$Y>=LOD & df$Y<LOQ] <- LOD
+df$Y_UB[df$Y>=LOD & df$Y<LOQ] <- LOQ
+df$Cens[df$Y>=LOD & df$Y<LOQ] <- paste("\u2265","LOD, <LOQ", sep = "")
+
+df$Y_MB <- (df$Y_LB + df$Y_UB)/2
+
+
+# もしもExcelで作成したファイルを読み込むのであれば、
+# 以下のコードを利用する
+#
+# library(readxl)
+# df <- readxl::read_xlsx("data.xlsx", sheet = 1)
+
+
+df %>% ggplot(aes(x=Y_MB)) +
+  geom_histogram(
+    aes(fill=Cens), position = "stack", colour="black",
+    breaks = 10^seq(-1, 1, by= 0.1)
+  )+
+  annotation_logticks(sides = "b") + # l で左だけ，trblだと上下左右にtickが入る
+  scale_x_log10( # y軸を対数軸に
+    breaks = 10^(-7:7),
+    labels = trans_format("log10", math_format(10^.x)) # y軸の表記を10^x
+  ) +
+  xlab("Concentration") + ylab("Frequency")
+
+```
+
+Stanファイルをコンパイルする
+```{r}
+stan_model2 <- cmdstan_model(paste0(getwd(),"/Conc_Lognorm.stan"))
+# Conc_Lognorm.exeが自動的に作成される
+
+stan_model2
+```
+
+Stanを用いたベイズ推定を行う
+```{r}
+N <- nrow(df) # サンプルサイズ
+Y_L <- df$Y_LB # 測定値の下限値
+Y_U <- df$Y_UB # 測定値の上限値
+N_new <- 50 # 2D-MCS用の乱数生成数
+
+standata <- list(
+  N=N, Y_L=Y_L, Y_U=Y_U, gsd_int=2, N_new=N_new
+)
+
+thin <- 1
+n_warmup <- 500
+n_sampling <- 500
+chain <- 4
+
+start <- Sys.time()
+
+fit <- stan_model2$sample(
+  data = standata,
+  parallel_chains = 4,
+  chains = chain,
+  thin = thin,
+  iter_warmup = n_warmup * thin,
+  iter_sampling = n_sampling * thin,
+  save_warmup = TRUE,
+  seed = 123,
+  adapt_delta = 0.8,
+  max_treedepth = 10
+)
+
+end <- Sys.time()
+time <- end -start
+time
+
+stanfit2 <- rstan::read_stan_csv(fit$output_files())
+
+summary.fit2 <- as.data.frame(summary(stanfit2))
+
+summary(stanfit2)$summary[c("gm", "gsd", "theo_mean", "theo_sd", "lp__"),  c(1, 3, 4, 5, 6, 7, 8, 9, 10)] %>%
+  as.data.frame() %>%
+  formattable()
+
+d.ms2 <- rstan::extract(stanfit2)
+
+WAIC2 <- loo::waic(extract_log_lik(stanfit2))
+WAIC2
+
+
+```
+
+トレースプロット
+```{r}
+library(bayesplot)
+
+mcmc_trace(
+  rstan::extract(stanfit2, inc_warmup = TRUE, permuted = FALSE),
+  n_warmup = n_warmup,
+  pars = c("gm", "gsd", "theo_mean", "theo_sd", "lp__"),
+  facet_args = list(ncol = 1)
+) +
+  ggplot2::geom_line(alpha=0.25, size=0.75) +
+  ggplot2::scale_color_discrete() +
+  ggplot2::theme_bw() 
+
+```
+
+二次元モンテカルロシミュレーションの結果
+```{r}
+df.post2 <- data.frame(
+  ID = seq(1,2000, by=1),
+  Chain = rep(seq(1,chain, by=1),n_sampling),
+  gm_hat = d.ms2$gm,
+  gsd_hat = d.ms2$gsd,
+  Y_new = d.ms2$Y_new
+)
+
+df.post2 <- df.post2 %>% tidyr::gather("Number", "Value", 5:(N_new+4))
+
+df.post2 %>% ggplot(aes(x=Value, y=..density..)) +
+  geom_line(aes(colour=factor(ID)), stat = "density", alpha=0.1) +
+  geom_histogram(colour="black", alpha=0, bins=50) +
+  annotation_logticks(sides = "b") + # l で左だけ，trblだと上下左右にtickが入る
+  scale_x_log10( # x軸を対数軸に
+    breaks = 10^(-12:7),
+    labels = trans_format("log10", math_format(10^.x)) # x軸の表記を10^xに
+  ) +
+  theme(legend.position="none") +
+  xlab("Concentration") + ylab("Density")
+
+# PNGファイルで保存したい場合は以下のコードを実行
+ggsave("2D-MCS (ver Cmdstanr).png", dpi=300, width=6, height=4)
+```
+
+```{r}
+sessionInfo()
+
+```
+

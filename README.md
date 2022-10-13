@@ -18,6 +18,7 @@ Supplemental information for FFI Journal
 
 **ベイズ推定を用いた二次元モンテカルロシミュレーションについて**<br>
 * 鈴木美成, 近藤翠, 北山育子, 穐山浩, 堤智昭, 二次元モンテカルロシミュレーションを用いた食事性鉛曝露量分布の推定:トータルダイエット試料への適用の試み, 食品衛生学雑誌, (accepted).
+* 鈴木美成, 二次元モンテカルロシミュレーションを用いた食事性鉛曝露量分布の推定, FFIジャーナル, (accepted).
 <br>
 なお、このフォルダ内のコードを実行したことによって生じたすべての障害・損害・不具合等に関しては、私と私の関係者および私の所属するいかなる団体・組織とも、一切の責任を負いません。
 各自の責任においてご使用下さい。
@@ -53,23 +54,13 @@ Supplemental information for FFI Journal
 <br>R: <https://www.r-project.org/>
 <br>RStudio: <https://www.rstudio.com/products/rstudio/download/>
 <br>
-<br>このRプロジェクトでは、{rstan}パッケージ(※注2)を使用しています。
+<br>このRプロジェクトでは、{rstan}パッケージ\[^※注2]を使用しています。
 <br>下記のサイトに従って{rstan}パッケージのインストールして下さい。
 <br>
 <br>https://mc-stan.org/users/interfaces/rstan
 <br>https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started-(Japanese)
 <br>
 <br>
-<br>※注1 ≪RstudioがPositへと変更≫
-<br>このReadmeを作製した時点で、RStudioはPositに変更されることがアナウンスされています。
-<br>本Readmeが修正されていない場合は、RStudioをPositと読み替えて下さい。
-<br>
-<br>※注2 ≪{rstan}パッケージの開発状況について≫
-<br>{rstan}は2020年7月以降更新されておらず (2022/8/2 現在)、最新のStanの機能が使えません。
-<br>また、個人的な印象ですが、{rstan}パッケージは不安定で計算の途中で止まってしまうこともよ
-くあります。そこで、{rstan}の使用方法が分かったら、早いうちに{cmdstanr}パッケージに乗り
-換えることを薦めます。なお、{rstan}で使用したstanコードは{cmdstanr}でも使用することが可
-能です。
 <br>{cmdstanr}のインストールおよび実行方法は下記のサイトを参考にして下さい。
 <br>
 <br>https://mc-stan.org/cmdstanr/
@@ -101,4 +92,13 @@ Supplemental information for FFI Journal
 <br>2022/10/13: GitHubにアップロード 
 <br>
 ## ≪作者≫
-<br>鈴木美成
+<br>鈴木美成<br>
+---
+※注1: ≪RstudioがPositへと変更≫<br>
+このReadmeを作製した時点で、RStudioはPositに変更されることがアナウンスされています。<br>
+本Readmeが修正されていない場合は、RStudioをPositと読み替えて下さい。<br>
+
+※注2 ≪{rstan}パッケージの開発状況について≫<br>
+{rstan}は2020年7月以降更新されておらず (2022/8/2 現在)、最新のStanの機能が使えません。<br>
+また、個人的な印象ですが、{rstan}パッケージは不安定で計算の途中で止まってしまうこともよくあります。そこで、{rstan}の使用方法が分かったら、早いうちに{cmdstanr}パッケージに乗り
+換えることを薦めます。なお、{rstan}で使用したstanコードは{cmdstanr}でも使用することが可能です。

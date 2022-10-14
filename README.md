@@ -82,7 +82,7 @@ RおよびRStudioのアンインストールは、公式のHPを参照してく�
 <br>
 [^1]: ≪RstudioがPositへと変更≫ <br>
 このReadmeを作製した時点で、RStudioはPositに変更されることがアナウンスされています。<br>
-本Readmeが修正されていない場合は、RStudioをPositと読み替えて下さい。<br>
+本Readmeが修正されていない場合は、RStudioをPositと読み替えて下さい。
 
 [^2]: ≪{rstan}パッケージの開発状況について≫ <br>
 {rstan}は2020年7月以降更新されておらず (2022/8/2 現在)、最新のStanの機能が使えません。<br>

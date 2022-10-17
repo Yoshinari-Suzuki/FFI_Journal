@@ -57,7 +57,7 @@ RStudio: <https://www.rstudio.com/products/rstudio/download/><br>
 <br>
 {cmdstanr}のインストールおよび実行方法は下記のサイトを参考にして下さい。<br>
 <https://mc-stan.org/cmdstanr/>
-
+<https://norimune.net/3609>
 ## ≪使用方法≫
 RStudioを起動して、フォルダ内の"2D-MCS.Rproj"を開いて下さい。<br>
 右下ペインのFileタブより、"2D-MCS.Rmd"をクリックしRmdファイルを開いて下さい。<br>

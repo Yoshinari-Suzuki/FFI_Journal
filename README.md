@@ -56,7 +56,7 @@ RStudio: <https://www.rstudio.com/products/rstudio/download/><br>
 <https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started-(Japanese)><br>
 <br>
 {cmdstanr}のインストールおよび実行方法は下記のサイトを参考にして下さい。<br>
-<https://mc-stan.org/cmdstanr/>
+<https://mc-stan.org/cmdstanr/><br>
 <https://norimune.net/3609>
 ## ≪使用方法≫
 RStudioを起動して、フォルダ内の"2D-MCS.Rproj"を開いて下さい。<br>

@@ -14,8 +14,8 @@ Supplemental information for FFI Journal
 * [Suzuki, Y., Tanaka, N. and Akiyama, H., Attempt of Bayesian Estimation from Left-censoredData Using the Markov Chain Monte Carlo Method: Exploring Cr(VI) Concentrations in Mineral  Water Products. Food Safety, 8(4), 67-89, DOI: 10.14252/foodsafetyfscj.D-20-00007, (2020)](https://www.jstage.jst.go.jp/article/foodsafetyfscj/8/4/8_D-20-00007/_article).<br>
 
 **ベイズ推定を用いた二次元モンテカルロシミュレーションについて**<br>
-* [鈴木美成, 近藤翠, 北山育子, 穐山浩, 堤智昭, 二次元モンテカルロシミュレーションを用いた食事性鉛曝露量分布の推定:トータルダイエット試料への適用の試み, 食品衛生学雑誌, 64(1), 1-12 (2023)] (https://www.jstage.jst.go.jp/article/shokueishi/64/1/64_1/_article/-char/ja).<br>
-* [鈴木美成, 食品を介した有害元素の摂取量推定, FFIジャーナル, 228(1), 025-034 (2023)] (https://www.jstage.jst.go.jp/article/ffij/228/1/228_025/_article/-char/ja/).
+* [鈴木美成, 近藤翠, 北山育子, 穐山浩, 堤智昭, 二次元モンテカルロシミュレーションを用いた食事性鉛曝露量分布の推定:トータルダイエット試料への適用の試み, 食品衛生学雑誌, 64(1), 1-12 (2023)](https://www.jstage.jst.go.jp/article/shokueishi/64/1/64_1/_article/-char/ja).<br>
+* [鈴木美成, 食品を介した有害元素の摂取量推定, FFIジャーナル, 228(1), 025-034 (2023)](https://www.jstage.jst.go.jp/article/ffij/228/1/228_025/_article/-char/ja/).
 <br>
 なお、このフォルダ内のコードを実行したことによって生じたすべての障害・損害・不具合等に関しては、私と私の関係者および私の所属するいかなる団体・組織とも、一切の責任を負いません。
 各自の責任においてご使用下さい。<br>
